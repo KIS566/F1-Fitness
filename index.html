@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>F1 Fitness · Crossings Republik | Back Animation</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+      background-color: #0D0D0D;
+      color: #FFFFFF;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    h1, h2, h3 {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .accent-text {
+      color: #FF6B2C;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #FF6B2C;
+      color: #0D0D0D;
+      border-color: #FF6B2C;
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: #FF6B2C;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border-color: white;
+    }
+    .btn-outline:hover {
+      background: white;
+      color: #0D0D0D;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 70%;
+      height: 4px;
+      background: #FF6B2C;
+    }
+
+    .card {
+      background: #1A1A1A;
+      border-radius: 20px;
+      padding: 25px;
+      border: 1px solid #2a2a2a;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 35px rgba(255, 107, 44, 0.2);
+      border-color: #FF6B2C;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: rgba(13, 13, 13, 0.95);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: white;
+    }
+    .logo span {
+      color: #FF6B2C;
+    }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: #FF6B2C;
+    }
+    .nav-cta {
+      background: #FF6B2C;
+      padding: 10px 22px !important;
+      border-radius: 30px;
+      color: #0D0D0D !important;
+      font-weight: 700;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(rgba(13,13,13,0.7), rgba(13,13,13,0.9)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      padding: 120px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .racing-stripe {
+      height: 6px;
+      width: 120px;
+      background: #FF6B2C;
+      margin: 25px auto;
+      border-radius: 3px;
+    }
+
+    /* STATS */
+    .stats-bar {
+      background: #1A1A1A;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 50px;
+      padding: 30px 20px;
+      border-top: 2px solid #FF6B2C;
+      border-bottom: 2px solid #FF6B2C;
+    }
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #FF6B2C;
+    }
+
+    /* MEMBERSHIP */
+    .membership-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .membership-card {
+      flex: 1 1 280px;
+      background: #1A1A1A;
+      border-radius: 25px;
+      padding: 35px 25px;
+      text-align: center;
+      border: 1px solid #333;
+    }
+    .membership-card.featured {
+      border: 2px solid #FF6B2C;
+      transform: scale(1.03);
+      background: #1f1f1f;
+    }
+    .price {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #FF6B2C;
+      margin: 20px 0;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .service-box {
+      background: #1A1A1A;
+      padding: 25px 15px;
+      border-radius: 16px;
+      text-align: center;
+      font-weight: 700;
+      border-bottom: 4px solid #FF6B2C;
+    }
+
+    /* REVIEWS */
+    .reviews-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .review-card {
+      flex: 1 1 280px;
+      background: #1A1A1A;
+      border-radius: 20px;
+      padding: 25px;
+    }
+    .stars {
+      color: #FF6B2C;
+      margin-bottom: 12px;
+    }
+
+    /* TRAINERS */
+    .trainers-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+      justify-content: center;
+    }
+    .trainer-card {
+      flex: 1 1 200px;
+      text-align: center;
+    }
+    .trainer-img {
+      width: 100%;
+      border-radius: 20px;
+      height: 260px;
+      object-fit: cover;
+      border: 2px solid #FF6B2C;
+    }
+
+    /* GALLERY PAGE */
+    .gallery-page {
+      background: #0A0A0A;
+      padding: 60px 0;
+    }
+    .gallery-masonry {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #1A1A1A;
+      border: 1px solid #2a2a2a;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      height: 320px;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      padding: 25px 20px;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: 0.4s ease;
+      color: white;
+    }
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .gallery-overlay h4 {
+      color: #FF6B2C;
+      font-weight: 800;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 20px;
+      border: 2px solid #FF6B2C;
+    }
+    .close-lightbox {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 3rem;
+      color: #FF6B2C;
+      cursor: pointer;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, #1A1A1A 0%, #0D0D0D 100%);
+      text-align: center;
+      border-top: 3px solid #FF6B2C;
+    }
+
+    /* CONTACT */
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .map-container {
+      flex: 1 1 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #FF6B2C;
+    }
+    iframe {
+      width: 100%;
+      height: 280px;
+      border: 0;
+    }
+
+    footer {
+      background: #0a0a0a;
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #2a2a2a;
+      color: #aaa;
+    }
+
+    /* WHATSAPP */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+      z-index: 999;
+      animation: pulse 2s infinite;
+      text-decoration: none;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    /* ANIMATION CLASSES (Bidirectional) */
+    .fade-up, .slide-in-left, .zoom-in, .fade-in-back {
+      opacity: 0;
+      transition: opacity 0.8s cubic-bezier(0.15, 0.85, 0.35, 1), transform 0.8s cubic-bezier(0.15, 0.85, 0.35, 1);
+    }
+    .fade-up {
+      transform: translateY(50px);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .slide-in-left {
+      transform: translateX(-60px);
+    }
+    .slide-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .zoom-in {
+      transform: scale(0.8);
+    }
+    .zoom-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    /* Additional back animation class */
+    .fade-in-back {
+      transform: translateY(40px);
+    }
+    .fade-in-back.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 15px 20px; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #0D0D0D;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+      }
+      .nav-links.active { display: flex; }
+      .menu-toggle { display: block; }
+      .hero h1 { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">F1<span>FITNESS</span></div>
+    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#membership">Plans</a>
+      <a href="#services">Services</a>
+      <a href="#trainers">Trainers</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact" class="nav-cta">Join</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero fade-up">
+    <div class="container">
+      <h1>UNLEASH YOUR <span class="accent-text">INNER CHAMPION</span></h1>
+      <div class="racing-stripe"></div>
+      <p style="font-size:1.4rem;">469 Reviews — Most Popular Gym in Crossings Republik</p>
+      <p style="font-size:1.3rem; margin-bottom:30px;">⭐ 4.6 · Open 5am - 11pm Daily</p>
+      <a href="tel:08448850930" class="btn btn-primary"><i class="fas fa-phone"></i> 084488 50930</a>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-bar fade-in-back">
+    <div><span class="stat-number">469+</span><br>Reviews</div>
+    <div><span class="stat-number">⭐4.6</span><br>Rating</div>
+    <div><span class="stat-number">2018</span><br>Since</div>
+    <div><span class="stat-number">5AM-11PM</span><br>Daily</div>
+  </div>
+
+  <!-- Membership -->
+  <section id="membership" class="container">
+    <h2 class="section-title fade-up">RACE-READY <span class="accent-text">PLANS</span></h2>
+    <div class="membership-grid">
+      <div class="membership-card slide-in-left"><h3>🔥 SPRINT</h3><div class="price">₹999<span style="font-size:1rem;">/mo</span></div><p>Gym Access · Locker</p><a href="#" class="btn btn-outline">Start</a></div>
+      <div class="membership-card featured zoom-in"><h3>🏁 GRAND PRIX</h3><div class="price">₹1,999<span style="font-size:1rem;">/mo</span></div><p>Classes + PT 2x</p><a href="#" class="btn btn-primary">Popular</a></div>
+      <div class="membership-card slide-in-left"><h3>🏆 ELITE</h3><div class="price">₹3,499<span style="font-size:1rem;">/mo</span></div><p>Unlimited PT · Nutrition</p><a href="#" class="btn btn-outline">Elite</a></div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section class="container">
+    <h2 class="section-title fade-up">WHY <span class="accent-text">F1 FITNESS</span></h2>
+    <div style="display:flex; flex-wrap:wrap; gap:30px; margin-top:30px;" class="fade-in-back">
+      <div style="flex:1;"><i class="fas fa-dumbbell" style="color:#FF6B2C; font-size:2rem;"></i><h3>Top Gear</h3></div>
+      <div style="flex:1;"><i class="fas fa-clock" style="color:#FF6B2C; font-size:2rem;"></i><h3>16H Access</h3></div>
+      <div style="flex:1;"><i class="fas fa-users" style="color:#FF6B2C; font-size:2rem;"></i><h3>Community</h3></div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="container">
+    <h2 class="section-title fade-up">SERVICES</h2>
+    <div class="services-grid fade-in-back">
+      <div class="service-box"><i class="fas fa-heartbeat"></i><br>Cardio</div>
+      <div class="service-box"><i class="fas fa-weight-hanging"></i><br>Strength</div>
+      <div class="service-box"><i class="fas fa-spa"></i><br>Yoga</div>
+      <div class="service-box"><i class="fas fa-biking"></i><br>Spin</div>
+      <div class="service-box"><i class="fas fa-user-friends"></i><br>CrossFit</div>
+      <div class="service-box"><i class="fas fa-apple-alt"></i><br>Nutrition</div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="container">
+    <h2 class="section-title fade-up">REVIEWS</h2>
+    <div class="reviews-container fade-in-back">
+      <div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"Best gym in Crossings Republik!"</p><strong>- Rohan S.</strong></div>
+      <div class="review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"F1 vibes are real. Love it."</p><strong>- Priya M.</strong></div>
+    </div>
+  </section>
+
+  <!-- Trainers -->
+  <section id="trainers" class="container">
+    <h2 class="section-title fade-up">PIT CREW</h2>
+    <div class="trainers-grid fade-in-back">
+      <div class="trainer-card"><img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=1974&auto=format&fit=crop" class="trainer-img"><h3>Arjun</h3></div>
+      <div class="trainer-card"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?q=80&w=2070&auto=format&fit=crop" class="trainer-img"><h3>Neha</h3></div>
+      <div class="trainer-card"><img src="https://images.unsplash.com/photo-1609899587317-7e8c2b6b6c0e?q=80&w=1974&auto=format&fit=crop" class="trainer-img"><h3>Raghav</h3></div>
+    </div>
+  </section>
+
+  <!-- GALLERY PAGE WITH BACK ANIMATION -->
+  <section id="gallery" class="gallery-page">
+    <div class="container">
+      <h2 class="section-title fade-up" style="color:white;">TRACK <span class="accent-text">GALLERY</span></h2>
+      <p style="margin-bottom:20px; color:#aaa;" class="fade-in-back">Click any image to expand · professional F1 energy</p>
+      <div class="gallery-masonry">
+        <div class="gallery-item fade-in-back"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop" alt="Gym floor"><div class="gallery-overlay"><h4>Strength Zone</h4></div></div>
+        <div class="gallery-item fade-in-back"><img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?q=80&w=1931&auto=format&fit=crop" alt="Weights"><div class="gallery-overlay"><h4>Free Weights</h4></div></div>
+        <div class="gallery-item fade-in-back"><img src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop" alt="Cycling"><div class="gallery-overlay"><h4>Spin Studio</h4></div></div>
+        <div class="gallery-item fade-in-back"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=2070&auto=format&fit=crop" alt="Training"><div class="gallery-overlay"><h4>Group Class</h4></div></div>
+        <div class="gallery-item fade-in-back"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070&auto=format&fit=crop" alt="Cardio"><div class="gallery-overlay"><h4>Cardio Deck</h4></div></div>
+        <div class="gallery-item fade-in-back"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=2070&auto=format&fit=crop" alt="Locker"><div class="gallery-overlay"><h4>Premium Lockers</h4></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img src="" alt="Gallery Image" id="lightboxImg">
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section fade-up">
+    <div class="container">
+      <h2 style="font-size:2.5rem;">READY TO <span class="accent-text">RACE?</span></h2>
+      <p style="margin:20px 0;">237 Second Floor Orbit Plaza, Crossings Republik, Ghaziabad</p>
+      <a href="tel:08448850930" class="btn btn-primary">📞 084488 50930</a>
+    </div>
+  </section>
+
+  <!-- Contact + Map -->
+  <section id="contact" class="container fade-up">
+    <h2 class="section-title">CONTACT</h2>
+    <div class="contact-wrapper">
+      <div style="flex:1;"><p><i class="fas fa-map-marker-alt accent-text"></i> Orbit Plaza, 2nd Floor</p><p>Ghaziabad UP 201016</p></div>
+      <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.123456789!2d77.123456!3d28.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjh8MDcuM!5e0!3m2!1sen!2sin!4v1610000000000" allowfullscreen=""></iframe></div>
+    </div>
+  </section>
+
+  <footer class="fade-in-back">
+    <p>© 2025 F1 Fitness · Crossings Republik | #MostPopularGym</p>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/918448850930?text=Hi%20F1%20Fitness%2C%20I%20want%20to%20know%20about%20membership!" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- JavaScript: Bidirectional Animations + Lightbox -->
+  <script>
+    (function() {
+      // Mobile menu toggle
+      const toggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      toggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('active'));
+      });
+
+      // Bidirectional Scroll Animation: works when scrolling down AND back up
+      const animatedElements = document.querySelectorAll('.fade-up, .slide-in-left, .zoom-in, .fade-in-back');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          } else {
+            // REMOVE visible class when element leaves viewport (so it can re-animate when scrolling back)
+            entry.target.classList.remove('visible');
+          }
+        });
+      }, { threshold: 0.2, rootMargin: "0px 0px -30px 0px" });
+
+      animatedElements.forEach(el => observer.observe(el));
+
+      // Lightbox functionality
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const closeBtn = document.querySelector('.close-lightbox');
+      const galleryImages = document.querySelectorAll('.gallery-item img');
+
+      galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+          lightbox.style.display = 'flex';
+          lightboxImg.src = img.src;
+        });
+      });
+
+      closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) lightbox.style.display = 'none';
+      });
+    })();
+  </script>
+</body>
+</html>
